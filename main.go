@@ -25,8 +25,8 @@ func echoHandler(w http.ResponseWriter, r *http.Request) {
 	//calling a function to read the file
 	records, err := ReadFile(r)
 	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
 		w.Write([]byte(fmt.Sprintf("error %s", err.Error())))
-		return
 	}
 	var response string
 	for _, row := range records {
@@ -39,6 +39,7 @@ func invertHandler(w http.ResponseWriter, r *http.Request) {
 	//calling a function to read the file
 	records, err := ReadFile(r)
 	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
 		w.Write([]byte(fmt.Sprintf("error %s", err.Error())))
 		return
 	}
@@ -54,6 +55,7 @@ func flattenHandler(w http.ResponseWriter, r *http.Request) {
 	//calling a function to read the file
 	records, err := ReadFile(r)
 	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
 		w.Write([]byte(fmt.Sprintf("error %s", err.Error())))
 		return
 	}
@@ -68,6 +70,7 @@ func sumHandler(w http.ResponseWriter, r *http.Request) {
 	//calling a function to read the file
 	records, err := ReadFile(r)
 	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
 		w.Write([]byte(fmt.Sprintf("error %s", err.Error())))
 		return
 	}
@@ -85,6 +88,7 @@ func multiplyHandler(w http.ResponseWriter, r *http.Request) {
 	//calling a function to read the file
 	records, err := ReadFile(r)
 	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
 		w.Write([]byte(fmt.Sprintf("error %s", err.Error())))
 		return
 	}
