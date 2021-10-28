@@ -1,6 +1,10 @@
 package main
 
-import "strconv"
+import (
+	"encoding/csv"
+	"net/http"
+	"strconv"
+)
 
 func Invert(matrix [][]string) [][]string {
 	var i, j int
@@ -39,4 +43,16 @@ func Math(matrix [][]string, isSum bool) (string, error) {
 		}
 	}
 	return strconv.Itoa(total), nil
+}
+func ReadFile(r *http.Request) ([][]string, error) {
+	file, _, err := r.FormFile("matrix")
+	if err != nil {
+		return nil, err
+	}
+	defer file.Close()
+	records, err := csv.NewReader(file).ReadAll()
+	if err != nil {
+		return nil, err
+	}
+	return records, nil
 }
